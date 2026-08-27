@@ -10,14 +10,23 @@ export const LogoKabupatenCianjur: React.FC<{
   size?: number;
   customUrl?: string;
 }> = ({ className = '', size = 76, customUrl }) => {
-  const finalUrl = customUrl ? (customUrl.includes('allorigins') ? customUrl : `https://api.allorigins.win/raw?url=${encodeURIComponent(customUrl)}`) : logoKiriUrl;
+  const [imgSrc, setImgSrc] = React.useState(() => {
+    return customUrl ? (customUrl.includes('allorigins') ? customUrl : `https://api.allorigins.win/raw?url=${encodeURIComponent(customUrl)}`) : logoKiriUrl;
+  });
+
   return (
     <img
-      src={finalUrl}
+      src={imgSrc}
       alt="Logo Kabupaten Cianjur"
       width={size}
       className={`object-contain inline-block shrink-0 ${className}`}
       crossOrigin="anonymous"
+      onError={() => {
+        // Fallback to direct URL if proxy fails
+        if (imgSrc.includes('allorigins')) {
+          setImgSrc(customUrl || "https://drive.google.com/uc?export=view&id=1uJ4ACirNnGY7NIErAZY7qwNSekC0AuQm");
+        }
+      }}
     />
   );
 };
@@ -27,14 +36,23 @@ export const LogoSdnSukalaksana: React.FC<{
   size?: number;
   customUrl?: string;
 }> = ({ className = '', size = 76, customUrl }) => {
-  const finalUrl = customUrl ? (customUrl.includes('allorigins') ? customUrl : `https://api.allorigins.win/raw?url=${encodeURIComponent(customUrl)}`) : logoKananUrl;
+  const [imgSrc, setImgSrc] = React.useState(() => {
+    return customUrl ? (customUrl.includes('allorigins') ? customUrl : `https://api.allorigins.win/raw?url=${encodeURIComponent(customUrl)}`) : logoKananUrl;
+  });
+
   return (
     <img
-      src={finalUrl}
+      src={imgSrc}
       alt="Logo SD Negeri Sukalaksana"
       width={size}
       className={`object-contain inline-block shrink-0 ${className}`}
       crossOrigin="anonymous"
+      onError={() => {
+        // Fallback to direct URL if proxy fails
+        if (imgSrc.includes('allorigins')) {
+          setImgSrc(customUrl || "https://drive.google.com/uc?export=view&id=1-5wkGy5GmreMK0jgcuL81cy5AZbBw7gi");
+        }
+      }}
     />
   );
 };
